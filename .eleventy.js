@@ -1,30 +1,14 @@
-const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
+module.exports = function (eleventyConfig) {
+  // Passthrough the Tailwind CSS build output to the /dist folder
+  eleventyConfig.addPassthroughCopy({ 'dist/assets': 'assets' });
+  eleventyConfig.addPassthroughCopy({ 'src/assets/images': 'assets/images' });
 
-
-module.exports = function(eleventyConfig) {
-
-  eleventyConfig.addPlugin(eleventyNavigationPlugin);
-  eleventyConfig.addPassthroughCopy('src/img')
-
-
-  const {
-    DateTime
-  } = require("luxon");
-
-  // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
-    eleventyConfig.addFilter('htmlDateString', (dateObj) => {
-      return DateTime.fromJSDate(dateObj, {
-        zone: 'utc'
-      }).toFormat('yy-MM-dd');
-    });
-
-    eleventyConfig.addFilter("readableDate", dateObj => {
-    return DateTime.fromJSDate(dateObj, {
-      zone: 'utc'
-    }).toFormat("dd-MM-yy");
-  });
-
+  // Specify input and output directories
   return {
-    dir: { input: 'src', output: '_site' }
+    dir: {
+      input: 'src', // Source files will be in ./src
+      includes: '_includes', // Nunjucks includes folder
+      output: '_site', // Output folder will be ./dist
+    },
   };
 };

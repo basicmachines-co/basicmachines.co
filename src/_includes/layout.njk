@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link href="/assets/tailwind.css" rel="stylesheet">
+</head>
+<body class="bg-white text-black">
+<header class="p-4 border-b">
+    <div class="container mx-auto">
+        <h1 class="text-xl font-bold">Basic Machines</h1>
+    </div>
+</header>
+
+<main>
+    {{ content | safe }}
+</main>
+
+<footer class="p-4 border-t">
+    <div class="container mx-auto">
+        <p>© 2024 Basic Machines</p>
+    </div>
+</footer>
+</body>
+</html>
