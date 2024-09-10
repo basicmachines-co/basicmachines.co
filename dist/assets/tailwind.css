@@ -589,6 +589,9 @@ video {
 .h-auto {
   height: auto;
 }
+.min-h-screen {
+  min-height: 100vh;
+}
 .w-12 {
   width: 3rem;
 }
@@ -603,6 +606,9 @@ video {
 }
 .max-w-lg {
   max-width: 32rem;
+}
+.flex-grow {
+  flex-grow: 1;
 }
 .grow {
   flex-grow: 1;

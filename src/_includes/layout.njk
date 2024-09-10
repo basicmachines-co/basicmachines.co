@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" x-data="{ open: false }">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
     <link href="/assets/tailwind.css" rel="stylesheet">
-    <!-- Include Alpine.js -->
+    <!-- Alpine.js for menu toggling -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.10.2/dist/cdn.min.js"></script>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="ff814f76-4b76-45cb-b255-5aeef48d03a2"></script>
 </head>
-<body class="bg-white dark:bg-gray-900 text-black dark:text-white">
+<body class="bg-white dark:bg-gray-900 text-black dark:text-white flex flex-col min-h-screen" x-data="{ open: false }">
+
 <!-- Navigation Bar with Theme Toggle -->
 <header class="bg-white dark:bg-gray-900 p-4 border-b border-gray-200 dark:border-gray-700">
     <div class="container mx-auto flex justify-between items-center">
-        <!-- Logo / Branding -->
-        <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Basic Machines</h1>
+        <a href="/"><h1 class="text-2xl font-bold text-gray-900 dark:text-white">Basic Machines</h1></a>
 
         <!-- Desktop Navigation Links aligned right -->
         <div class="flex items-center space-x-6">
@@ -44,7 +43,7 @@
     </div>
 
     <!-- Mobile Menu (visible when toggled) -->
-    <nav x-show="open" class="lg:hidden bg-white dark:bg-gray-900">
+    <nav x-show="open" class="lg:hidden bg-white dark:bg-gray-900" @click.away="open = false" x-transition>
         <a href="/" class="block px-4 py-2 text-gray-900 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 text-xl">Home</a>
         <a href="/product" class="block px-4 py-2 text-gray-900 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 text-xl">Product</a>
         <a href="/developers" class="block px-4 py-2 text-gray-900 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 text-xl">Developers</a>
@@ -53,13 +52,15 @@
     </nav>
 </header>
 
-<main>
+<!-- Main Content -->
+<main class="flex-grow">
     {{ content | safe }}
 </main>
 
-<footer class="p-4 border-t bg-gray-900 border-gray-700">
+<!-- Footer -->
+<footer class="p-4 bg-gray-900 text-white">
     <div class="container mx-auto">
-        <p class="text-gray-300">© 2024 Basic Machines</p>
+        <p>© 2024 Basic Machines</p>
     </div>
 </footer>
 
@@ -67,7 +68,6 @@
     const themeToggleBtn = document.getElementById('theme-toggle');
     const html = document.querySelector('html');
 
-    // Check system preference and set default theme
     const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const storedTheme = localStorage.getItem('theme');
     const defaultDark = storedTheme === 'dark' || (!storedTheme && prefersDarkScheme);
@@ -78,7 +78,6 @@
         html.classList.remove('dark');
     }
 
-    // Toggle theme
     themeToggleBtn.addEventListener('click', () => {
         html.classList.toggle('dark');
         localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
