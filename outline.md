@@ -25,6 +25,7 @@ III. Technical Manifestation
         - Server-side rendering as simplification
         - Component ownership over dependency
         - Making modern UI accessible to all
+        - view source 
      
      B. Basic Foundation
         - Full-stack independence
